@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23667eea" width="1200" height="600"/><circle fill="%23764ba2" cx="300" cy="150" r="100"/><circle fill="%23ffd700" cx="900" cy="450" r="80"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            background: #ffd700;
+            color: #333;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .products {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .admin-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .admin-link:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="http://localhost:8000/admin" class="admin-link" target="_blank">Admin Panel</a>
+    
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🛍️ E-Shop</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to E-Shop</h1>
+            <p>Your one-stop destination for amazing products</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone</h3>
+                        <div class="product-price">$299.99</div>
+                        <p class="product-description">Latest smartphone with amazing features and great camera quality.</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">💻</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Laptop</h3>
+                        <div class="product-price">$899.99</div>
+                        <p class="product-description">High-performance laptop perfect for work and gaming.</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Headphones</h3>
+                        <div class="product-price">$149.99</div>
+                        <p class="product-description">Premium quality headphones with noise cancellation.</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">⌚</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Smart Watch</h3>
+                        <div class="product-price">$199.99</div>
+                        <p class="product-description">Fitness tracking smartwatch with health monitoring.</p>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 E-Shop. All rights reserved. | Backend: <a href="http://localhost:8000" style="color: #ffd700;">http://localhost:8000</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        
+        // Add to cart functionality
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.textContent === 'Add to Cart') {
+                    e.preventDefault();
+                    
+                    // Get product info
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-title').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent;
+                    
+                    // Add to cart
+                    cart.push({
+                        name: productName,
+                        price: productPrice
+                    });
+                    
+                    // Update UI
+                    this.textContent = 'Added!';
+                    this.style.background = '#28a745';
+                    
+                    // Show cart count
+                    updateCartCount();
+                    
+                    setTimeout(() => {
+                        this.textContent = 'Add to Cart';
+                        this.style.background = '#ffd700';
+                    }, 2000);
+                }
+            });
+        });
+        
+        // Update cart count
+        function updateCartCount() {
+            let cartCount = document.getElementById('cart-count');
+            if (!cartCount) {
+                // Create cart count element
+                const nav = document.querySelector('.nav');
+                const cartCountEl = document.createElement('div');
+                cartCountEl.id = 'cart-count';
+                cartCountEl.style.cssText = 'background: #ffd700; color: #333; padding: 5px 10px; border-radius: 15px; font-weight: bold;';
+                nav.appendChild(cartCountEl);
+            }
+            document.getElementById('cart-count').textContent = `Cart (${cart.length})`;
+        }
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Check backend connection
+        fetch('http://localhost:8000/admin/')
+            .then(response => {
+                if (response.ok) {
+                    console.log('Backend is running!');
+                    // Show backend status
+                    const statusEl = document.createElement('div');
+                    statusEl.style.cssText = 'position: fixed; bottom: 20px; left: 20px; background: #28a745; color: white; padding: 10px; border-radius: 5px; font-size: 12px;';
+                    statusEl.textContent = 'Backend Connected ✓';
+                    document.body.appendChild(statusEl);
+                }
+            })
+            .catch(error => {
+                console.log('Backend not running');
+                const statusEl = document.createElement('div');
+                statusEl.style.cssText = 'position: fixed; bottom: 20px; left: 20px; background: #dc3545; color: white; padding: 10px; border-radius: 5px; font-size: 12px;';
+                statusEl.textContent = 'Backend Not Connected ✗';
+                document.body.appendChild(statusEl);
+            });
+    </script>
+</body>
+</html>
